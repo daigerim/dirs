@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 40%;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #4a148c;
+        }
+        .add-link-container {
+            margin-bottom: 20px;
+        }
+        a.add-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6a1b9a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        a.add-link:hover {
+            background-color: #4a148c;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: white;
+            color: black;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4a148c;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .delete-link {
+            color: #e74c3c;
+        }
+        .delete-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Country List</h1>
+        <div class="add-link-container">
+            <a href="{% url 'create_country' %}" class="add-link">Add New Country</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Country Name</th>
+                    <th>Population</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for country in countries %}
+                <tr>
+                    <td>{{ country.cname }}</td>
+                    <td>{{ country.population }}</td>
+                    <td>
+                        <a href="{% url 'update_country' country.cname %}">Edit</a>
+                        <a href="{% url 'delete_country' country.cname %}" class="delete-link" onclick="return confirm('Are you sure you want to delete {{ country.cname }}?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Personnel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        header nav ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        header nav ul li a:hover {
+            color: #c0c0c0;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        .personnel-list {
+            margin: 20px auto;
+            width: 60%;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #333;
+            color: white;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/disease">Diseases</a></li>
+                <li><a href="/personnel">Healthcare Personnel</a></li>
+                <li><a href="/records">Records</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Healthcare Personnel</h1>
+
+        <!-- Doctors Table -->
+        <section class="personnel-list">
+            <h2>Doctors</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Degree</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctor in doctors %}
+                    <tr>
+                        <td>{{ doctor.email.email }}</td>
+                        <td>{{ doctor.email.name }}</td>
+                        <td>{{ doctor.email.surname }}</td>
+                        <td>{{ doctor.degree }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Public Servants Table -->
+        <section class="personnel-list">
+            <h2>Public Servants</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for public_servant in public_servants %}
+                    <tr>
+                        <td>{{ public_servant.email.email }}</td>
+                        <td>{{ public_servant.email.name }}</td>
+                        <td>{{ public_servant.email.surname }}</td>
+                        <td>{{ public_servant.department }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Health Reporting System</p>
+    </footer>
+</body>
+</html>
+

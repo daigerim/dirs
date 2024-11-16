@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseases</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px 0;
+        }
+
+        header nav ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        header nav ul li a:hover {
+            color: #c0c0c0;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        .disease-list {
+            margin: 20px auto;
+            width: 60%;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #555;
+            padding: 8px;
+            text-align: left;
+            color: white;
+        }
+
+        table th {
+            background-color: #333;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #fff;
+            text-align: center;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/disease">Diseases</a></li>
+                <li><a href="/personnel">Healthcare Personnel</a></li>
+                <li><a href="/records">Records</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Diseases</h1>
+        <section class="disease-list">
+            <h2>List of Diseases and their Discovery</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Disease Code</th>
+                        <th>Pathogen</th>
+                        <th>Description</th>
+                        <th>Country</th>
+                        <th>First Encounter Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in disease_list %}
+                    <tr>
+                        <td>{{ item.disease_code }}</td>
+                        <td>{{ item.pathogen }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.discover__country__cname }}</td>
+                        <td>{{ item.discover__first_enc_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Health Reporting System</p>
+    </footer>
+</body>
+</html>
+

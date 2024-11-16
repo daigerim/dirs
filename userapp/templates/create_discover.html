@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Discovery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        .form-container {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: black;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+        label {
+            font-size: 16px;
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+        select, input[type="date"] {
+            width: 92%;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #f8f9fa;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #6a1b9a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4a148c;
+        }
+        .back-link {
+            margin-top: 15px;
+            display: block;
+            font-size: 14px;
+            color: #3498db;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .error-list {
+            color: #e74c3c;
+            list-style-type: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Create Discovery</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <label for="country">Country:</label>
+                <select name="country" id="country">
+                    {% for c in country %}
+                        <option value="{{ c.pk }}" {% if c.pk == form.country.value %}selected{% endif %}>{{ c.cname }}</option>
+                    {% endfor %}
+                </select>
+                {% if form.country.errors %}
+                    <ul class="error-list">
+                        {% for error in form.country.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="disease">Disease:</label>
+                <select name="disease" id="disease">
+                    {% for d in disease %}
+                        <option value="{{ d.pk }}" {% if d.pk == form.disease.value %}selected{% endif %}>{{ d.disease_code }}</option>
+                    {% endfor %}
+                </select>
+                {% if form.disease.errors %}
+                    <ul class="error-list">
+                        {% for error in form.disease.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="first_enc_date">First Encounter Date:</label>
+                <input type="date" name="first_enc_date" id="first_enc_date" value="{{ form.first_enc_date.value }}">
+                {% if form.first_enc_date.errors %}
+                    <ul class="error-list">
+                        {% for error in form.first_enc_date.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <button type="submit">Create Discovery</button>
+        </form>
+
+        <a href="{% url 'discover_list' %}" class="back-link">Back to Discovery List</a>
+    </div>
+</body>
+</html>

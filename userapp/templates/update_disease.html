@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Disease</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #4a148c;
+        }
+        label {
+            font-size: 16px;
+            color: #4a148c;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #f8f9fa;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #6a1b9a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4a148c;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Update Disease</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="disease_code">Disease Code:</label>
+            <input type="text" id="disease_code" name="disease_code" value="{{ disease.disease_code }}" readonly>
+
+            <label for="pathogen">Pathogen:</label>
+            <input type="text" id="pathogen" name="pathogen" value="{{ disease.pathogen }}" required>
+
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" value="{{ disease.description }}" required>
+
+            <label for="disease_type">Disease Type:</label>
+            <select id="disease_type" name="disease_type" required>
+                {% for disease_type in disease_types %}
+                    <option value="{{ disease_type.id }}" {% if disease.disease_type.id == disease_type.id %}selected{% endif %}>
+                        {{ disease_type.description }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Update Disease</button>
+        </form>
+    </div>
+</body>
+</html>
